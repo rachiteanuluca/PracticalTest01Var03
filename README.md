@@ -1,1 +1,3 @@
-# PracticalTest01Var03
+Student: Rachiteanu Luca
+Grupa: 342B2
+PracticalTest01Var03
