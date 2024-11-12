@@ -7,6 +7,7 @@
 
     <EditText
         android:id="@+id/number1"
+        android:saveEnabled="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="number" />
@@ -32,6 +33,7 @@
 
     <EditText
         android:id="@+id/number2"
+        android:saveEnabled="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="number" />

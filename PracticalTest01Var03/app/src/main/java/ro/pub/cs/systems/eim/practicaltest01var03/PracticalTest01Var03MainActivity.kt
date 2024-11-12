@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 
@@ -42,5 +43,20 @@ class PracticalTest01Var03MainActivity : AppCompatActivity() {
             result!!.text = "Rezultat: $diff"
         }
 
+        savedInstanceState?.let {
+            number1!!.setText(it.getString("edit_text_1"))
+            number2!!.setText(it.getString("edit_text_2"))
+
+            Toast.makeText(this, "Numarul 1: "+ number1!!.text + ", Numarul 2: " + number2!!.text, Toast.LENGTH_LONG).show()
+        }
+
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        // Salvaţi starea EditText
+        outState.putString("edit_text_1", number1!!.text.toString())
+        outState.putString("edit_text_2", number2!!.text.toString())
     }
 }
