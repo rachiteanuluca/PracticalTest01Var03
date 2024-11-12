@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import ro.pub.cs.systems.eim.practicaltest01var03.PracticalTest01Var03SecondaryActivity as PracticalTest01Var03SecondaryActivity1
 
 
 class PracticalTest01Var03MainActivity : AppCompatActivity() {
@@ -17,6 +18,7 @@ class PracticalTest01Var03MainActivity : AppCompatActivity() {
     var addButton: Button? = null
     var subtractButton: Button? = null
     var nextButton: Button? = null
+    var operationResult: Int? = null;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,17 +32,27 @@ class PracticalTest01Var03MainActivity : AppCompatActivity() {
         nextButton = findViewById<View>(R.id.next_button) as Button
 
         addButton!!.setOnClickListener {
-            val num1 = number1!!.text.toString().toInt()
-            val num2 = number2!!.text.toString().toInt()
-            val sum = num1 + num2
-            result!!.text = "Rezultat: $sum"
+            try {
+                val num1 = number1!!.text.toString().toInt()
+                val num2 = number2!!.text.toString().toInt()
+                operationResult = num1 + num2
+                result!!.text = "$num1 + $num1 = $operationResult"
+            }
+            catch (e: NumberFormatException) {
+                Toast.makeText(this, "Vă rugăm să introduceți numere întregi valide", Toast.LENGTH_SHORT).show()
+            }
+
         }
 
         subtractButton!!.setOnClickListener {
-            val num1 = number1!!.text.toString().toInt()
-            val num2 = number2!!.text.toString().toInt()
-            val diff = num1 - num2
-            result!!.text = "Rezultat: $diff"
+            try {
+                val num1 = number1!!.text.toString().toInt()
+                val num2 = number2!!.text.toString().toInt()
+                operationResult = num1 - num2
+                result!!.text = "$num1 + $num1 = $operationResult"
+            }catch (e: NumberFormatException) {
+                Toast.makeText(this, "Vă rugăm să introduceți numere întregi valide", Toast.LENGTH_SHORT).show()
+            }
         }
 
         savedInstanceState?.let {
@@ -50,6 +62,12 @@ class PracticalTest01Var03MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Numarul 1: "+ number1!!.text + ", Numarul 2: " + number2!!.text, Toast.LENGTH_LONG).show()
         }
 
+        nextButton!!.setOnClickListener {
+            val intent = Intent()
+            intent.action = "ro.pub.cs.systems.eim.SECONDARY_ACTIVITY_INTENT"
+            intent.putExtra("result", operationResult)
+            startActivity(intent)
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
